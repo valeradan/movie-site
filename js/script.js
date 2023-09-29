@@ -46,4 +46,38 @@ movieDB.movies.forEach((film, i) => {
         <div class="delete"></div>
         </li>
     `;
-}); 
+});
+
+movieList.insertAdjacentHTML("afterend", "<h2>HELOOOO </h2>")
+
+
+let buttonFilm = document.querySelector("button"),
+    nameNewFilm = document.querySelector(".adding__input");
+
+buttonFilm.addEventListener("click", (event) => {
+    event.preventDefault();
+    movieDB.movies.push(nameNewFilm.value)
+
+    let indexMovie = movieDB.movies.length; // let indexMovie = movieDB.movies.findIndex(el => el == movieDB.movies.slice(-1)) - вернул почему то 5 индекс, хотя должен был 6
+    let nameMovie = movieDB.movies.slice(-1).join();
+
+    let maxLength = 21;
+
+    if (nameMovie.length >= maxLength) {
+        nameMovie = nameMovie.substring(0, maxLength) + "...";
+    }
+
+
+    let newMovie = document.createElement("li");
+    newMovie.classList.add("promo__interactive-item");
+
+    newMovie.textContent = `${indexMovie}. ${nameMovie}`;
+
+    let deleteButton = document.createElement("div");
+    deleteButton.classList.add("delete");
+
+    movieList.append(newMovie);
+    newMovie.append(deleteButton);
+
+
+})
